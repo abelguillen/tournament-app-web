@@ -6,10 +6,12 @@ import { PartidoProvider } from './partido';
 // const host = "http://localhost:8080";
 
 // qashost
-const host = "https://tournament-app-ibiza-qas.herokuapp.com";
+// const host = "https://tournament-app-ibiza-qas.herokuapp.com";
 
 // prdhost
 // const host = "https://tournament-app-ibiza-prd.herokuapp.com";
+
+const host = process.env.REACT_APP_HOST;
 
 const jugadorApiUrl = host + '/jugador';
 const partidoApiUrl = host + '/partido';
