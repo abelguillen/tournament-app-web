@@ -2,8 +2,17 @@
 import { JugadorProvider } from './jugador';
 import { PartidoProvider } from './partido';
 
-const jugadorApiUrl = 'http://localhost:8080/jugador';
-const partidoApiUrl = 'http://localhost:8080/partido';
+// localhost
+// const host = "http://localhost:8080";
+
+// qashost
+const host = "https://tournament-app-ibiza-qas.herokuapp.com";
+
+// prdhost
+// const host = "https://tournament-app-ibiza-prd.herokuapp.com";
+
+const jugadorApiUrl = host + '/jugador';
+const partidoApiUrl = host + '/partido';
 
 var providers = {
   Jugadores: JugadorProvider(jugadorApiUrl),
