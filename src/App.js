@@ -18,7 +18,7 @@ const dataProvider = RootProvider;
 
 const App = () => (
     <Admin 
-        title="Torneo Diegol"
+        title="Tournament App"
         menu={Menu}
         dataProvider={dataProvider}
         dashboard={Dashboard}

@@ -44,7 +44,7 @@ const exporter = (props) => {
               'puntos'
           ]
     });
-    downloadCSV(csv, 'tabla_diegol');
+    downloadCSV(csv, 'tabla_torneo');
 }
 
 const DeleteConfirmTitle = '¿Está seguro que desea eliminar al jugador?';
