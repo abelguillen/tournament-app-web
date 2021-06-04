@@ -2,7 +2,8 @@
 import { JugadorProvider } from './jugador';
 import { PartidoProvider } from './partido';
 
-// localhost
+// localhost start command
+// REACT_APP_HOST="http://localhost:8080" npm start
 // const host = "http://localhost:8080";
 
 // qashost
