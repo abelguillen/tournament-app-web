@@ -25,6 +25,7 @@ export const PartidoList = props => {
                     label="Fecha"
                     source="partido.fecha" 
                     locales='es-419'
+                    showTimes
                 />
                 <TextField 
                     label="Nro Partido" 
