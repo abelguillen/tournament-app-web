@@ -2,15 +2,16 @@
 import { JugadorProvider } from './jugador';
 import { PartidoProvider } from './partido';
 
-// localhost start command
+// START COMMANDS
+
+// localhost
 // REACT_APP_HOST="http://localhost:8080" npm start
-// const host = "http://localhost:8080";
 
 // qashost
-// const host = "https://tournament-app-ibiza-qas.herokuapp.com";
+// REACT_APP_HOST="https://tournament-app-ibiza-qas.herokuapp.com" npm start
 
 // prdhost
-// const host = "https://tournament-app-ibiza-prd.herokuapp.com";
+// REACT_APP_HOST="https://tournament-app-ibiza-prd.herokuapp.com" npm start
 
 const host = process.env.REACT_APP_HOST;
 
