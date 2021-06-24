@@ -59,7 +59,6 @@ export const PartidoProvider=(apiUrl)=>{
     },
     [CREATE]:(params)=>{
       var jugador = {
-        nroPartido: params.data.partido.nroPartido,
         equipoA: params.data.equipoA,
         equipoB: params.data.equipoB,
         ganador: params.data.partido.ganador,

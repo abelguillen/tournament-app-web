@@ -8,21 +8,18 @@ import {
     useRedirect,
     required,
     TopToolbar,
-    MenuItemLink
+    ListButton,
+    maxLength
 } from 'react-admin';
-import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import ChevronLeft from '@material-ui/icons/ChevronLeft';
 
-const CreateTitle = ({ record }) => {
+const CreateTitle = () => {
     return <span>Crear jugador</span>
 };
 
-const BackActions = ({ basePath, data, resource }) => (
+const BackActions = ({ basePath }) => (
     <TopToolbar>
-        <MenuItemLink
-            to="/jugadores"
-            primaryText="Atras"
-            leftIcon={<ArrowBackIcon />}
-        />
+        <ListButton basePath={basePath} icon={<ChevronLeft />} />
     </TopToolbar>
 );
 
@@ -32,7 +29,13 @@ export const JugadorCreate = ({ classes, ...props }) => {
     const redirect = useRedirect();
 
     const onSuccess = () => {
-        notify(`Changes saved`)
+        notify(`Jugador creado exitosamente`)
+        redirect('/jugadores');
+        refresh();
+    };
+
+    const onFailure = (error) => {
+        notify(`Ha ocurrido un error: ${error.message}`)
         redirect('/jugadores');
         refresh();
     };
@@ -41,6 +44,7 @@ export const JugadorCreate = ({ classes, ...props }) => {
         <Create 
             actions={<BackActions/>}
             onSuccess={onSuccess}
+            onFailure={onFailure}
             title={<CreateTitle />}
             {...props}
         >
@@ -48,7 +52,7 @@ export const JugadorCreate = ({ classes, ...props }) => {
                 {...props} 
             >
                 <TextInput
-                    validate={[required()]}
+                    validate={[required(), maxLength(15)]}
                     label="Nombre"
                     source="jugador.nombre"
                     fullWidth={false}

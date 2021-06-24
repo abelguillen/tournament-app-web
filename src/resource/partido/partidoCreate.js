@@ -11,52 +11,103 @@ import {
     DateInput,
     SelectInput,
     required,
-    MenuItemLink,
-    TopToolbar
+    TopToolbar,
+    ListButton,
+    number
 } from 'react-admin';
-import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import { useState } from 'react';
+import ChevronLeft from '@material-ui/icons/ChevronLeft';
 
-const CreateTitle = ({ record }) => {
+const CreateTitle = () => {
     return <span>Crear partido</span>
 };
 
-const BackActions = ({ basePath, data, resource }) => (
+const BackActions = ({ basePath }) => (
     <TopToolbar>
-        <MenuItemLink
-            to="/partidos"
-            primaryText="Atras"
-            leftIcon={<ArrowBackIcon />}
-        />
+        <ListButton basePath={basePath} icon={<ChevronLeft />} />
     </TopToolbar>
 );
 
 export const PartidoCreate = ({ classes, ...props }) => {
+    const [bonusDisabled, setBonusDisabled] = useState(true);
+    const [validateBonus, setValidateBonus] = useState([number()]);
+    const [equipoA, setEquipoA] = useState();
+    const [equipoB, setEquipoB] = useState();
     const notify = useNotify();
     const refresh = useRefresh();
     const redirect = useRedirect();
 
     const onSuccess = () => {
-        notify(`Changes saved`)
+        notify(`Partido creado exitosamente`)
         redirect('/partidos');
         refresh();
     };
+
+    const onFailure = (error) => {
+        notify(`Ha ocurrido un error: ${error.message}`)
+        redirect('/partidos');
+        refresh();
+    };
+
+    const ganadorHandleChange = event => {
+        var ganador = event.target.value;
+        if(ganador == 'EMPATE') {
+            setBonusDisabled(true);
+            setValidateBonus([number()]);
+        } else {
+            setBonusDisabled(false);
+            setValidateBonus([required(), number()]);
+        }
+    };
+
+    const equipoAHandleChange = event => {
+        setEquipoA(event.target.value);
+    };
+
+    const equipoBHandleChange = event => {
+        setEquipoB(event.target.value);
+    };
+
+    const teamValidationA = (value, allValues) => {
+        if(equipoB != null) {
+            for (var i = 0; i < equipoB.length; i++) {
+               if(allValues.equipoA[allValues.equipoA.length - 1] == equipoB[i]) {
+                   return "El jugador solo puede pertenecer a un equipo";
+               }
+            }
+            return undefined;
+        } else {
+            return undefined;
+        }
+    };
+
+    const teamValidationB = (value, allValues) => {
+        if(equipoA != null) {
+            for (var i = 0; i < equipoA.length; i++) {
+               if(allValues.equipoB[allValues.equipoB.length - 1] == equipoA[i]) {
+                   return "El jugador solo puede pertenecer a un equipo";
+               }
+            }
+            return undefined;
+        } else {
+            return undefined;
+        }
+    };
+    
+    const validateEquipoA = [required(), teamValidationA];
+    const validateEquipoB = [required(), teamValidationB];
 
     return (
         <Create 
             actions={<BackActions/>}
             onSuccess={onSuccess}
+            onFailure={onFailure}
             title={<CreateTitle />}
             {...props}
         >
             <SimpleForm  
                 {...props} 
             >
-                <TextInput
-                    validate={[required()]}
-                    label="Nro Partido"
-                    source="partido.nroPartido"
-                    fullWidth={false}
-                />
                 <DateInput
                     validate={[required()]}
                     label="Fecha"
@@ -67,6 +118,7 @@ export const PartidoCreate = ({ classes, ...props }) => {
                     label="Ganador" 
                     source="partido.ganador" 
                     validate={[required()]} 
+                    onChange={ganadorHandleChange}
                     choices={[
                         { id: 'A', name: 'A' },
                         { id: 'B', name: 'B' },
@@ -74,16 +126,19 @@ export const PartidoCreate = ({ classes, ...props }) => {
                      ]}
                 />
                 <TextInput
-                    validate={[required()]}
+                    validate={validateBonus}
                     label="Bonus"
                     source="partido.bonus"
                     fullWidth={false}
+                    disabled={bonusDisabled}
+                    defaultValue={0}
                 />
                 <ReferenceArrayInput 
-                    validate={[required()]}
+                    validate={validateEquipoA}
                     label="Equipo A"
                     source="equipoA" 
                     reference="Jugadores"
+                    onChange={equipoAHandleChange}
                 >
                     <SelectArrayInput 
                         id="jugador.id"
@@ -92,10 +147,11 @@ export const PartidoCreate = ({ classes, ...props }) => {
                     />
                 </ReferenceArrayInput>
                 <ReferenceArrayInput 
-                    validate={[required()]}
+                    validate={validateEquipoB}
                     label="Equipo B"
                     source="equipoB"
                     reference="Jugadores"
+                    onChange={equipoBHandleChange}
                 >
                     <SelectArrayInput 
                         id="jugador.id"

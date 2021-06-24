@@ -7,12 +7,15 @@ import {
     ReferenceArrayInput,
     SimpleForm,
 } from 'react-admin';
+import CardContent from "@material-ui/core/CardContent";
 
 const VerticalSpacer = () => <span style={{ height: '1em' }} />;
 
 const Welcome = () => (
     <Card>
-        <Typography variant="h3" gutterBottom>Bienvenido al Administrador de Torneos</Typography>
+        <CardContent>
+            <Typography variant="h3" >Bienvenido al Administrador de Torneos</Typography>
+        </CardContent>
     </Card>
 );
 
@@ -38,15 +41,23 @@ const TablaDePuntos = () => {
     )
 };
 
+// const valor = 4;
+
 export default() => {
     return (
         <>
             <Welcome />
             <VerticalSpacer />
-            <VerticalSpacer />
-            <Typography variant="h5" gutterBottom>Lista de puntos</Typography>
-            <VerticalSpacer />
-            <TablaDePuntos/>
+            {/* {
+                () => valor == 4 ? ( */}
+                    <Card>
+                        <CardContent>
+                            <Typography variant="h5" gutterBottom>Lista de puntos</Typography>
+                            <TablaDePuntos/>
+                        </CardContent>
+                    </Card>
+                {/* ) : null
+            } */}
         </>
     );
 };

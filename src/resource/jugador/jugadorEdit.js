@@ -7,11 +7,14 @@ import {
     SaveButton,
     required,
     TopToolbar,
-    MenuItemLink
+    useNotify,
+    useRefresh, 
+    useRedirect,
+    ListButton
 } from 'react-admin';
-import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import ChevronLeft from '@material-ui/icons/ChevronLeft';
 
-const EditTitle = ({ record }) => {
+const EditTitle = ({record}) => {
   if(record && record.id){
     return <span>Editar jugador #{record.jugador.nombre}</span>
   }
@@ -20,11 +23,7 @@ const EditTitle = ({ record }) => {
 
 const BackActions = ({ basePath, data, resource }) => (
     <TopToolbar>
-        <MenuItemLink
-            to="/jugadores"
-            primaryText="Atras"
-            leftIcon={<ArrowBackIcon />}
-        />
+        <ListButton basePath={basePath} icon={<ChevronLeft />} />
     </TopToolbar>
 );
 
@@ -35,11 +34,28 @@ const CustomToolbar = props => (
 );
 
 export const JugadorEdit = ({ classes, ...props }) => {
-    
+    const notify = useNotify();
+    const refresh = useRefresh();
+    const redirect = useRedirect();
+
+    const onSuccess = () => {
+        notify(`Jugador modificado exitosamente`)
+        redirect('/jugadores');
+        refresh();
+    };
+
+    const onFailure = (error) => {
+        notify(`Ha ocurrido un error: ${error.message}`)
+        redirect('/jugadores');
+        refresh();
+    };
+
     return (
         <Edit 
             actions={<BackActions/>}
             title={<EditTitle />}
+            onFailure={onFailure}
+            onSuccess={onSuccess}
             {...props}
         >
             <SimpleForm
