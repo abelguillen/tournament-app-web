@@ -7,10 +7,11 @@ import {
     Datagrid,
     ArrayField,
     TopToolbar,
-    MenuItemLink
+    MenuItemLink,
+    ListButton
 } from 'react-admin';
 import { Typography, Box } from '@material-ui/core';
-import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import ChevronLeft from '@material-ui/icons/ChevronLeft';
 
 const ShowTitle = ({ record }) => {
     if(record && record.id){
@@ -29,11 +30,7 @@ const partidoStyle = {
 
 const BackActions = ({ basePath, data, resource }) => (
     <TopToolbar>
-        <MenuItemLink
-            to="/partidos"
-            primaryText="Atras"
-            leftIcon={<ArrowBackIcon />}
-        />
+        <ListButton basePath={basePath} icon={<ChevronLeft />} />
     </TopToolbar>
 );
 
