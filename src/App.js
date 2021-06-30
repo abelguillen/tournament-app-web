@@ -9,22 +9,24 @@ import { PartidoShow } from './resource/partido/partidoShow';
 import { PartidoCreate } from './resource/partido/partidoCreate';
 import { RootProvider } from './providers';
 import Dashboard from './commons/Dashboard';
-import { CustomTheme, lightTheme, darkTheme } from './commons/Theme';
-import Menu from './commons/Menu';
-import { Login } from './commons';
+import { Login } from './layout';
+import { Layout } from './layout';
 import authProvider from './commons/authProvider';
+import themeReducer from './commons/themeReducer';
+import customRoutes from './commons/routes';
 
 const dataProvider = RootProvider;
 
 const App = () => (
     <Admin 
         title="Tournament App"
-        menu={Menu}
         dataProvider={dataProvider}
+        customRoutes={customRoutes}
+        customReducers={{ theme: themeReducer }}
         dashboard={Dashboard}
-        theme={CustomTheme}
         loginPage={Login}
         authProvider={authProvider}
+        layout={Layout}
     >
         <Resource 
             name="Jugadores" 
