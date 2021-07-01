@@ -14,10 +14,15 @@ import {
     Show,
     SimpleShowLayout,
     SimpleList,
-    useListContext
+    useListContext,
+    CreateButton
 } from 'react-admin';
 import CardContent from "@material-ui/core/CardContent";
+import { useState } from 'react';
 import keyBy from 'lodash/keyBy'
+import { JugadorList } from '../resource/jugador/jugadorList';
+import Box from '@material-ui/core/Box';
+import Button from '@material-ui/core/Button';
 
 const VerticalSpacer = () => <span style={{ height: '1em' }} />;
 
@@ -29,14 +34,73 @@ const Welcome = () => (
     </Card>
 );
 
-const TablaDePuntos = (data) => {
+const ListTitle = () => {
+    return <span></span>;
+};
 
+const Empty = () => {
+    const { basePath, resource } = useListContext();
     return (
-        <div>
-            {/* {data ? data.map((record) => (
-                <TextField source={record.jugador.nombre} />
-            )) : null} */}
-        </div>
+        <Box textAlign="center" m={1}>
+            <Typography variant="h4" paragraph>
+                No hay jugadores cargados
+            </Typography>
+            <Typography variant="body1">
+                Acceder al modulo "Jugadores" para comenzar con la carga
+            </Typography>
+        </Box>
+    );
+};
+
+const TablaDePuntos = ({data}, props) => {
+    return (
+        <List 
+            {...props} 
+            basePath="/" 
+            resource="Jugadores"
+            bulkActionButtons={false}
+            exporter={false}
+            pagination={false}
+            actions={false}
+            sort={{ field: 'puntos', order: 'DESC' }}
+            title={<ListTitle />}
+            empty={<Empty />}
+        >
+            <Datagrid key="id">
+                <TextField 
+                    label="Nombre" 
+                    source="jugador.nombre"/>
+                <TextField 
+                    label="PJ" 
+                    source="jugador.pj" 
+                />
+                <TextField 
+                    label="PG" 
+                    source="jugador.pg" 
+                />
+                <TextField 
+                    label="PE" 
+                    source="jugador.pe" 
+                />
+                <TextField 
+                    label="PP" 
+                    source="jugador.pp" 
+                />
+                <TextField 
+                    label="Bonus" 
+                    source="jugador.bonus" 
+                />
+                <TextField 
+                    label="Puntos" 
+                    source="jugador.puntos" 
+                />
+            </Datagrid>
+        </List>
+        // <div>
+        //     {data ? data.map((record) => (
+        //         <TextField source={record.jugador.nombre} />
+        //     )) : null}
+        // </div>
     )
 };
 

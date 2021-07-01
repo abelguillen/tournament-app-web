@@ -34,28 +34,28 @@ const CustomToolbar = props => (
 );
 
 export const JugadorEdit = ({ classes, ...props }) => {
-    const notify = useNotify();
-    const refresh = useRefresh();
-    const redirect = useRedirect();
+    // const notify = useNotify();
+    // const refresh = useRefresh();
+    // const redirect = useRedirect();
 
-    const onSuccess = () => {
-        notify(`Jugador modificado exitosamente`)
-        redirect('/jugadores');
-        refresh();
-    };
+    // const onSuccess = () => {
+    //     notify(`Jugador modificado exitosamente`)
+    //     redirect('/jugadores');
+    //     refresh();
+    // };
 
-    const onFailure = (error) => {
-        notify(`Ha ocurrido un error: ${error.message}`)
-        redirect('/jugadores');
-        refresh();
-    };
+    // const onFailure = (error) => {
+    //     notify(`Ha ocurrido un error: ${error.message}`)
+    //     redirect('/jugadores');
+    //     refresh();
+    // };
 
     return (
         <Edit 
             actions={<BackActions/>}
             title={<EditTitle />}
-            onFailure={onFailure}
-            onSuccess={onSuccess}
+            // onFailure={onFailure}
+            // onSuccess={onSuccess}
             {...props}
         >
             <SimpleForm
