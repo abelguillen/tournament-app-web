@@ -58,51 +58,51 @@ export const PartidoProvider=(apiUrl)=>{
       })
     },
     [CREATE]:(params)=>{
-      var jugador = {
+      var partido = {
         equipoA: params.data.equipoA,
         equipoB: params.data.equipoB,
         ganador: params.data.partido.ganador,
         bonus: params.data.partido.bonus
     }
-      return axios.post(`${apiUrl}/create`, jugador)
+      return axios.post(`${apiUrl}/create`, partido)
       .then((response)=>{
-        let jugador = response.data;
+        let partido = response.data;
         return {
           data: {
-            jugador,
-            id: jugador.id
+            partido,
+            id: partido.id
           }
         }
       })
     },
-    // [UPDATE]:(params)=>{
-    //   return axios.put(`${apiUrl}/update`, params.data.jugador)
-    //   .then((response)=>{
-    //     let jugador = response.data;
-    //     return {
-    //       data: {
-    //         jugador,
-    //         id: jugador.id
-    //       }
-    //     }
-    //   })
-    // },
-    // [DELETE]:(params)=>{
-    //   return axios.delete(`${apiUrl}/delete`, {
-    //     params: {
-    //       id: params.id
-    //     }
-    //   })
-    //   .then((response)=>{
-    //     let jugador = response.data;
-    //     return {
-    //       data: {
-    //         jugador,
-    //         id: jugador.id
-    //       }
-    //     }
-    //   })
-    // },
+    [UPDATE]:(params)=>{
+      return axios.put(`${apiUrl}/update`, params.data.partido)
+      .then((response)=>{
+        let partido = response.data;
+        return {
+          data: {
+            partido,
+            id: partido.id
+          }
+        }
+      })
+    },
+    [DELETE]:(params)=>{
+      return axios.delete(`${apiUrl}/delete`, {
+        params: {
+          id: params.id
+        }
+      })
+      .then((response)=>{
+        let partido = response.data;
+        return {
+          data: {
+            partido,
+            id: partido.id
+          }
+        }
+      })
+    },
     /*[DELETE_MANY]:(params)=>{
       const ids = params.ids;
       const promises = [];

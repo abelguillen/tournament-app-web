@@ -7,7 +7,6 @@ import {
     Datagrid,
     ArrayField,
     TopToolbar,
-    MenuItemLink,
     ListButton
 } from 'react-admin';
 import { Typography, Box } from '@material-ui/core';

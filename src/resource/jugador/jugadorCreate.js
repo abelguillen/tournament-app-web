@@ -34,17 +34,17 @@ export const JugadorCreate = ({ classes, ...props }) => {
         refresh();
     };
 
-    const onFailure = (error) => {
-        notify(`Ha ocurrido un error: ${error.message}`)
-        redirect('/jugadores');
-        refresh();
-    };
+    // const onFailure = (error) => {
+    //     notify(`Ha ocurrido un error: ${error.message}`)
+    //     redirect('/jugadores');
+    //     refresh();
+    // };
 
     return (
         <Create 
             actions={<BackActions/>}
             onSuccess={onSuccess}
-            onFailure={onFailure}
+            // onFailure={onFailure}
             title={<CreateTitle />}
             {...props}
         >
