@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { MenuItemLink } from 'react-admin';
+import { MenuItemLink, DashboardMenuItem } from 'react-admin';
 import { withRouter } from 'react-router-dom';
 import PersonIcon from '@material-ui/icons/Person';
 import SportsSoccerIcon from '@material-ui/icons/SportsSoccer';
@@ -20,11 +20,12 @@ const Menu = ({ onMenuClick, logout, dense = false }) => {
     return (
         <Box mt={1}>
             {' '}
-            <MenuItemLink
+            <DashboardMenuItem primaryText="Inicio" />
+            {/* <MenuItemLink
                 to="/"
                 primaryText="Inicio"
                 leftIcon={<DashboardIcon />}
-            />
+            /> */}
             <MenuItemLink
                 to="/jugadores"
                 primaryText="Jugadores"

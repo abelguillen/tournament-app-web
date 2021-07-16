@@ -4,27 +4,13 @@ import { Typography } from '@material-ui/core';
 import { 
     Datagrid,
     TextField,
-    ReferenceArrayInput,
-    SimpleForm,
-    useQueryWithStore,
     List,
-    ArrayField,
-    Loading, 
-    Error,
-    Show,
-    SimpleShowLayout,
-    SimpleList,
-    useListContext,
-    CreateButton
+    useListContext
 } from 'react-admin';
 import CardContent from "@material-ui/core/CardContent";
-import { useState } from 'react';
-import keyBy from 'lodash/keyBy'
-import { JugadorList } from '../resource/jugador/jugadorList';
 import Box from '@material-ui/core/Box';
-import Button from '@material-ui/core/Button';
 
-const VerticalSpacer = () => <span style={{ height: '1em' }} />;
+// const VerticalSpacer = () => <span style={{ height: '1em' }} />;
 
 const Welcome = () => (
     <Card>
