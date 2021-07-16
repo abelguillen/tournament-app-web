@@ -19,6 +19,16 @@ const fieldsMapping = {
   'jugador.pp': 'pp',
   'jugador.bonus': 'bonus',
   'jugador.puntos': 'puntos',
+  'jugador.efectividad': 'efectividad',
+  'id': 'id',
+  'nombre': 'nombre',
+  'pj': 'pj',
+  'pg': 'pg',
+  'pe': 'pe',
+  'pp': 'pp',
+  'bonus': 'bonus',
+  'puntos': 'puntos',
+  'efectividad': 'efectividad'
 }
 
 export const JugadorProvider=(apiUrl)=>{ 
@@ -70,7 +80,8 @@ export const JugadorProvider=(apiUrl)=>{
         pe: 0,
         pp: 0,
         bonus: 0,
-        puntos: 0
+        puntos: 0,
+        efectividad: "0%"
     }
       return axios.post(`${apiUrl}/create`, jugador)
       .then((response)=>{

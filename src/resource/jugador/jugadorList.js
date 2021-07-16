@@ -93,8 +93,11 @@ export const JugadorList = props => {
                     label="Puntos" 
                     source="jugador.puntos" 
                 />
+                <TextField 
+                    label="Efectividad" 
+                    source="jugador.efectividad" 
+                />
                 <EditButton />
-                {/* <DeleteButton /> */}
                 <DeleteWithCustomConfirmButton
                     title={DeleteConfirmTitle}
                     content={DeleteConfirmContent}

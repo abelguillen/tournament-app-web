@@ -104,6 +104,12 @@ export const JugadorEdit = ({ classes, ...props }) => {
                     source="jugador.puntos"
                     fullWidth={false}
                 />
+                <TextInput
+                    validate={[required()]}
+                    label="Efectividad"
+                    source="jugador.efectividad"
+                    fullWidth={false}
+                />
             </SimpleForm>
         </Edit>
     )
