@@ -52,7 +52,7 @@ const Empty = () => {
     );
 };
 
-const TablaDePuntos = ({data}, props) => {
+const TablaDePuntos = (props) => {
     return (
         <List 
             {...props} 
@@ -94,44 +94,24 @@ const TablaDePuntos = ({data}, props) => {
                     label="Puntos" 
                     source="jugador.puntos" 
                 />
+                <TextField 
+                    label="Efectividad" 
+                    source="jugador.efectividad" 
+                />
             </Datagrid>
         </List>
-        // <div>
-        //     {data ? data.map((record) => (
-        //         <TextField source={record.jugador.nombre} />
-        //     )) : null}
-        // </div>
     )
 };
 
 export default() => {
-
-    const { data, loading, error } = useQueryWithStore({
-        type: 'getList',
-        resource: 'Jugadores',
-        payload: {
-            filter: {},
-            sort: { field: 'nombre', order: 'DESC' },
-            pagination: { page: 1, perPage: 100 },
-        },
-    });
-
-    if (loading) return <Loading />;
-    if (error) return <Error />;
-    if (!data) return null;
-
     return (
         <>
             <Welcome />
             <Card>
-                {data ? (
-                    <CardContent>
-                        <Typography variant="h5" gutterBottom>Lista de puntos</Typography>
-                        <TablaDePuntos data={data}/>
-                    </CardContent>
-                ) : (
-                    <Typography variant="h5" gutterBottom>Sin datos</Typography>
-                )}
+                <CardContent>
+                    <Typography variant="h5" gutterBottom>Lista de puntos</Typography>
+                    <TablaDePuntos/>
+                </CardContent>
             </Card>
         </>
     );

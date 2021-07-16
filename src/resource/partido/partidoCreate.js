@@ -139,6 +139,7 @@ export const PartidoCreate = ({ classes, ...props }) => {
                     source="equipoA" 
                     reference="Jugadores"
                     onChange={equipoAHandleChange}
+                    sort={{ field: 'nombre', order: 'ASC' }}
                 >
                     <SelectArrayInput 
                         id="jugador.id"
@@ -152,6 +153,7 @@ export const PartidoCreate = ({ classes, ...props }) => {
                     source="equipoB"
                     reference="Jugadores"
                     onChange={equipoBHandleChange}
+                    sort={{ field: 'nombre', order: 'ASC' }}
                 >
                     <SelectArrayInput 
                         id="jugador.id"
