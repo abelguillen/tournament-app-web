@@ -1,5 +1,6 @@
 import axios from 'axios';
 import * as _ from 'lodash';
+import authHeader from '../auth-header';
 
 import {
   GET_LIST,
@@ -46,8 +47,7 @@ export const JugadorProvider=(apiUrl)=>{
         params: {
           sort_field: sortField,
           sort_order: sortOrder
-        }
-      })
+        },headers: authHeader()})
       .then((response)=>{
         return {
           data: response.data.map((jugador)=>{
@@ -61,7 +61,7 @@ export const JugadorProvider=(apiUrl)=>{
       })
     },
     [GET_ONE]:(params)=>{
-      return axios.get(`${apiUrl}/${params.id}`)
+      return axios.get(`${apiUrl}/${params.id}`, {headers: authHeader()})
       .then((response)=>{
         let jugador = response.data;
         return {
@@ -83,7 +83,7 @@ export const JugadorProvider=(apiUrl)=>{
         puntos: 0,
         efectividad: "0%"
     }
-      return axios.post(`${apiUrl}/create`, jugador)
+      return axios.post(`${apiUrl}/create`, jugador, {headers: authHeader()})
       .then((response)=>{
         let jugador = response.data;
         return {
@@ -95,7 +95,7 @@ export const JugadorProvider=(apiUrl)=>{
       })
     },
     [UPDATE]:(params)=>{
-      return axios.put(`${apiUrl}/update`, params.data.jugador)
+      return axios.put(`${apiUrl}/update`, params.data.jugador, {headers: authHeader()})
       .then((response)=>{
         let jugador = response.data;
         return {
@@ -110,7 +110,7 @@ export const JugadorProvider=(apiUrl)=>{
       return axios.delete(`${apiUrl}/delete`, {
         params: {
           id: params.id
-        }
+        }, headers: authHeader()
       })
       .then((response)=>{
         let jugador = response.data;
@@ -134,7 +134,7 @@ export const JugadorProvider=(apiUrl)=>{
         params: {
           sort_field: sortField,
           sort_order: sortOrder
-        }
+        }, headers: authHeader()
       })
       .then((response)=>{
         return {

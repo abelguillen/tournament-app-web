@@ -1,5 +1,6 @@
 import axios from 'axios';
 import * as _ from 'lodash';
+import authHeader from '../auth-header';
 
 import {
   GET_LIST,
@@ -31,8 +32,7 @@ export const PartidoProvider=(apiUrl)=>{
         params: {
           sort_field: sortField,
           sort_order: sortOrder
-        }
-      })
+        }, headers: authHeader()})
       .then((response)=>{
         return {
           data: response.data.map((partido)=>{
@@ -46,7 +46,7 @@ export const PartidoProvider=(apiUrl)=>{
       })
     },
     [GET_ONE]:(params)=>{
-      return axios.get(`${apiUrl}/${params.id}`)
+      return axios.get(`${apiUrl}/${params.id}`, {headers: authHeader()})
       .then((response)=>{
         let partido = response.data;
         return {
@@ -64,7 +64,7 @@ export const PartidoProvider=(apiUrl)=>{
         ganador: params.data.partido.ganador,
         bonus: params.data.partido.bonus
     }
-      return axios.post(`${apiUrl}/create`, partido)
+      return axios.post(`${apiUrl}/create`, partido, {headers: authHeader()})
       .then((response)=>{
         let partido = response.data;
         return {
@@ -76,7 +76,7 @@ export const PartidoProvider=(apiUrl)=>{
       })
     },
     [UPDATE]:(params)=>{
-      return axios.put(`${apiUrl}/update`, params.data.partido)
+      return axios.put(`${apiUrl}/update`, params.data.partido, {headers: authHeader()})
       .then((response)=>{
         let partido = response.data;
         return {
@@ -91,7 +91,7 @@ export const PartidoProvider=(apiUrl)=>{
       return axios.delete(`${apiUrl}/delete`, {
         params: {
           id: params.id
-        }
+        }, headers: authHeader()
       })
       .then((response)=>{
         let partido = response.data;
